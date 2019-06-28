@@ -1,5 +1,10 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class ArrayHandler<T> {
     private T[] array;
+    private List<T> arrayList;
 
     ArrayHandler(T[] array){
         this.array = array;
@@ -17,6 +22,19 @@ class ArrayHandler<T> {
     void showArray(){
         System.out.print("{");
         for(T i : array){
+            System.out.print(i + ", ");//Not smart, i know
+        }
+        System.out.println("}");
+    }
+
+    void transformToArrayList(){
+        arrayList = new ArrayList<>();
+        arrayList.addAll(Arrays.asList(array));
+    }
+
+    void showArrayList(){
+        System.out.print("{");
+        for(T i : arrayList){
             System.out.print(i + ", ");//Not smart, i know
         }
         System.out.println("}");
