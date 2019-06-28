@@ -24,7 +24,7 @@ class ArrayHandler<T> {
         for(T i : array){
             System.out.print(i + ", ");//Not smart, i know
         }
-        System.out.println("}");
+        System.out.println("...}");
     }
 
     void transformToArrayList(){
@@ -37,6 +37,6 @@ class ArrayHandler<T> {
         for(T i : arrayList){
             System.out.print(i + ", ");//Not smart, i know
         }
-        System.out.println("}");
+        System.out.println("...}");
     }
 }
