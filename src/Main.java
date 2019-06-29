@@ -1,12 +1,14 @@
 public class Main {
 
     private static final int APPLES_COUNT = 8;
+    private static final int APPLES_COUNT_2 = 10;
     private static final int MANGOS_COUNT = 12;
     private static final int AVOCADOS_COUNT = 10;
     private static final int PINEAPPLES_COUNT = 3;
 
     private static Box<Mango> boxOfMangos;
     private static Box<Apple> boxOfApples;
+    private static Box<Apple> boxOfApples2;
     private static Box<Avocado> boxOfAvocados;
     private static Box<Pineapple> boxOfPineapples;
 
@@ -14,6 +16,10 @@ public class Main {
         playArray();
         initBoxes();
         findEqualWeights();
+
+        System.out.println("\nPutting first apple box into second.");
+        boxOfApples.putToBox(boxOfApples2);
+        System.out.printf("First apple box now weights %f, second - %f.\n", boxOfApples.getWeight(), boxOfApples2.getWeight());
     }
 
     private static void playArray(){
@@ -40,6 +46,10 @@ public class Main {
         for (int i = 0; i < APPLES_COUNT; i++) {
             apples[i] = new Apple();
         }
+        Apple[] apples2 = new Apple[APPLES_COUNT_2];
+        for (int i = 0; i < APPLES_COUNT_2; i++) {
+            apples2[i] = new Apple();
+        }
         Avocado[] avocados = new Avocado[AVOCADOS_COUNT];
         for (int i = 0; i < AVOCADOS_COUNT; i++) {
             avocados[i] = new Avocado();
@@ -52,6 +62,8 @@ public class Main {
         boxOfMangos = new Box<>(mangos);
         System.out.print("Apples ");
         boxOfApples = new Box<>(apples);
+        System.out.print("Apples 2 ");
+        boxOfApples2 = new Box<>(apples2);
         System.out.print("Avocados ");
         boxOfAvocados = new Box<>(avocados);
         System.out.print("Pineapples ");
@@ -60,11 +72,16 @@ public class Main {
 
     private static void findEqualWeights(){
         System.out.println("Weight more or less equally:");
-        if(boxOfApples.areBoxWeightsEqual(boxOfAvocados)) System.out.println("Apples and avocados!");
-        if(boxOfApples.areBoxWeightsEqual(boxOfMangos)) System.out.println("Apples and mangos!");
-        if(boxOfApples.areBoxWeightsEqual(boxOfPineapples)) System.out.println("Apples and pineapples!");
-        if(boxOfMangos.areBoxWeightsEqual(boxOfAvocados)) System.out.println("Mangos and avocados!");
-        if(boxOfMangos.areBoxWeightsEqual(boxOfPineapples)) System.out.println("Mangos and pineapples!");
-        if(boxOfAvocados.areBoxWeightsEqual(boxOfPineapples)) System.out.println("Avocados and pineapples!");
+        if (boxOfApples.areBoxesWeightsEqual(boxOfAvocados))
+            System.out.println("Apples and avocados!");
+        if (boxOfApples.areBoxesWeightsEqual(boxOfMangos)) System.out.println("Apples and mangos!");
+        if (boxOfApples.areBoxesWeightsEqual(boxOfPineapples))
+            System.out.println("Apples and pineapples!");
+        if (boxOfMangos.areBoxesWeightsEqual(boxOfAvocados))
+            System.out.println("Mangos and avocados!");
+        if (boxOfMangos.areBoxesWeightsEqual(boxOfPineapples))
+            System.out.println("Mangos and pineapples!");
+        if (boxOfAvocados.areBoxesWeightsEqual(boxOfPineapples))
+            System.out.println("Avocados and pineapples!");
     }
 }

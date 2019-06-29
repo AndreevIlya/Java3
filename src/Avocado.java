@@ -3,6 +3,6 @@ import java.util.Random;
 class Avocado extends Fruit {
 
     Avocado() {
-        this.weight = (new Random().nextFloat() * 4 + 1) / 5;
+        this.weight = ((float) new Random().nextInt(4) + 1) / 5;
     }
 }

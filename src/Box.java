@@ -15,7 +15,19 @@ class Box<F extends Fruit> {
         content.add(fruit);
     }
 
-    private float getWeight(){
+    /*
+     * Take fruits from boxFrom and put to BoxTo, so apply as
+     * BoxFrom.addToBox(BoxTo)
+     * */
+
+    void putToBox(Box<F> box) {
+        for (F fruit : this.content) {
+            box.addFruit(fruit);
+        }
+        content = new ArrayList<>();
+    }
+
+    float getWeight() {
         float weight = 0;
         for(F fruit : content){
             weight += fruit.getWeight();
@@ -23,7 +35,7 @@ class Box<F extends Fruit> {
         return weight;
     }
 
-    boolean areBoxWeightsEqual(Box<? extends Fruit> box){
+    boolean areBoxesWeightsEqual(Box<? extends Fruit> box) {
         float thisWeight = this.getWeight();
         float boxWeight = box.getWeight();
         return thisWeight > boxWeight - 0.5f && thisWeight < boxWeight + 0.5f ||
