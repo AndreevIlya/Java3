@@ -1,5 +1,5 @@
 public class Main {
-    private static final int COUNT = 10;
+    private static final int COUNT = 100;
     private volatile char currentLetter = 'A';
 
     public static void main(String[] args) {
@@ -16,8 +16,7 @@ public class Main {
                     this.wait();
                 }
                 System.out.print(currentLetter);
-                if (currentLetter == 'A') currentLetter = 'B';
-                else currentLetter = 'C';
+                currentLetter = 'B';
                 this.notifyAll();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -32,8 +31,7 @@ public class Main {
                     this.wait();
                 }
                 System.out.print(currentLetter);
-                if (currentLetter == 'B') currentLetter = 'C';
-                else currentLetter = 'A';
+                currentLetter = 'C';
                 this.notifyAll();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -48,8 +46,7 @@ public class Main {
                     this.wait();
                 }
                 System.out.print(currentLetter);
-                if (currentLetter == 'C') currentLetter = 'A';
-                else currentLetter = 'B';
+                currentLetter = 'A';
                 this.notifyAll();
             } catch (InterruptedException e) {
                 e.printStackTrace();
