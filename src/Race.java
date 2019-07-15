@@ -11,4 +11,8 @@ class Race {
     Race(Stage... stages) {
         this.stages = new ArrayList<>(Arrays.asList(stages));
     }
+
+    int getStagesCount() {
+        return stages.size();
+    }
 }

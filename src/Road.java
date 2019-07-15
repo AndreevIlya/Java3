@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 public class Road extends Stage {
     Road(int length) {
         this.length = length;
@@ -5,13 +7,16 @@ public class Road extends Stage {
     }
 
     @Override
-    public void go(Car c) {
+    public int go(@NotNull Car car) {
+        int time = 0;
         try {
-            System.out.println(c.getName() + " начал этап: " + description);
-            Thread.sleep(length / c.getSpeed() * 1000);
-            System.out.println(c.getName() + " закончил этап: " + description);
+            System.out.println(car.getName() + " начал этап: " + description);
+            time = length / car.getSpeed();
+            Thread.sleep(time * 100);
+            System.out.printf("%s закончил этап: %s за %d секунд.\n", car.getName(), description, time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return time;
     }
 }

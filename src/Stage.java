@@ -2,9 +2,9 @@ public abstract class Stage {
     int length;
     String description;
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public abstract void go(Car c);
+    public abstract int go(Car c);
 }
