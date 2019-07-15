@@ -1,3 +1,5 @@
+import java.util.concurrent.BrokenBarrierException;
+
 public class Car implements Runnable {
     private static int CARS_COUNT;
 
@@ -27,13 +29,22 @@ public class Car implements Runnable {
     public void run() {
         try {
             System.out.println(this.name + " готовится");
+            Main.getBarrier().await();
             Thread.sleep(500 + (int) (Math.random() * 800));
             System.out.println(this.name + " готов");
+            Main.getCdlStart().countDown();
+            Main.getBarrier().await();
         } catch (Exception e) {
             e.printStackTrace();
         }
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
+            try {
+                Main.getBarrier().await();
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
+            }
         }
+        Main.getCdlFinish().countDown();
     }
 }
