@@ -18,7 +18,8 @@ public class Tester {
 
     public static void main(String[] args) {
         start(Testable.class);
-        //start(Testable.class.getName());
+        clearFields();
+        start(Testable.class.getName());
     }
 
     private static void start(Class testedClass) {
@@ -82,37 +83,15 @@ public class Tester {
                 Class[] type = method.getParameterTypes();
                 System.out.printf("Priority: %d. Action: ", method.getAnnotation(Test.class).priority());
                 try {
-                    if (type.length == 0) {
-                        method.invoke(testable);
-                        return;
-                    }
-                    if (type.length == 2) {
-                        method.invoke(testable, str1, str2);
-                        return;
-                    }
-                    if (type[0] == byte.class) {
-                        method.invoke(testable, byteNumber);
-                        return;
-                    }
-                    if (type[0] == int.class) {
-                        method.invoke(testable, intNumber);
-                        return;
-                    }
-                    if (type[0] == float.class) {
-                        method.invoke(testable, floatNumber);
-                        return;
-                    }
-                    if (type[0] == double.class) {
-                        method.invoke(testable, doubleNumber);
-                        return;
-                    }
-                    if (type[0] == Boolean.class) {//boolean.class does not work!
-                        method.invoke(testable, bool);
-                        return;
-                    }
-                    if (type[0] == String.class) {
-                        method.invoke(testable, str1);
-                    }
+                    if (type.length == 0) method.invoke(testable);
+                    else if (type.length == 2) method.invoke(testable, str1, str2);
+                    else if (type[0] == byte.class) method.invoke(testable, byteNumber);
+                    else if (type[0] == int.class) method.invoke(testable, intNumber);
+                    else if (type[0] == float.class) method.invoke(testable, floatNumber);
+                    else if (type[0] == double.class) method.invoke(testable, doubleNumber);
+                    else if (type[0] == Boolean.class) method.invoke(testable, bool);
+                        //boolean.class does not work!
+                    else if (type[0] == String.class) method.invoke(testable, str1);
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
@@ -121,5 +100,11 @@ public class Tester {
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void clearFields() {
+        beforeMethod = null;
+        testMethodsOrdered = new LinkedList<>();
+        afterMethod = null;
     }
 }
